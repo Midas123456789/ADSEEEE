@@ -109,7 +109,7 @@ plt.plot(second_front_loaded_passengers_positions, second_front_loaded_passenger
 plt.plot(second_rear_loaded_passengers_positions, second_rear_loaded_passengers_masses, 
          label="Rear-loaded Passengers", marker='^')
 
-plt.plot(fuel_positions, fuel_masses)
+plt.plot(fuel_positions, fuel_masses,label="Fuel", marker='^')
 
 # Configure labels and show
 plt.xlabel("Center of Gravity (m)")
