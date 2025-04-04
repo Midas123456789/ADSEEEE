@@ -38,7 +38,7 @@ def add_points(plane, objects, masses, xcgs, reversed=False):
 
 MAC = 2.305065311
 LEMAC = 9.149065006
-OEW = 13294
+OEW = 13600
 #empty_plane_cg = 0.357498253 + LEMAC
 #empty_plane_cg = 0.2290540063 + LEMAC
 #empty_plane_cg = 0.4859424998 + LEMAC
