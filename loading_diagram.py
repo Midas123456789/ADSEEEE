@@ -37,28 +37,33 @@ def add_points(plane, objects, masses, xcgs, reversed=False):
         
 
 MAC = 2.305065311
-LEMAC = 10.51244112
+LEMAC = 9.149065006
 OEW = 13294
-empty_plane_cg = 0.357498253 + LEMAC
-cargo = [(400, 4.45), (280, 22.5)] #(mass, pos)
+#empty_plane_cg = 0.357498253 + LEMAC
+#empty_plane_cg = 0.2290540063 + LEMAC
+#empty_plane_cg = 0.4859424998 + LEMAC
+empty_plane_cg = 0.27*MAC + LEMAC
+
+cargo = [(772.5714286, 6.697), (579.4285714, 23.92)] #(mass, pos)
 passenger_weight = 84
 rows = 18
 start_passenger_comp = 5.94
 length_passenger_comp = 12.29
 seat_dist = length_passenger_comp / (rows)
 seat = seat_dist / 2 + start_passenger_comp
-first_passengers = []
+passengers = []
 
 for pos in range(18):
-    first_passengers.append((2*passenger_weight, seat))
+    passengers.append((2*passenger_weight, seat))
     seat += seat_dist
 
-
+print(passengers)
 b = 27.05
 cR = 2.480525534
 cT = 1.389874894
-LE_cR = 8.865205242
+LE_cR = 8.865206061
 fuel_loc = LE_cR + compute_cg(b, cR, cT)
+print(compute_cg(b, cR, cT))
 fuel_weight = 1500
 MAC = 2.305065311
 
@@ -79,8 +84,8 @@ first_rear_loaded_passengers_masses = []
 first_front_loaded_passengers_masses = []
 first_rear_loaded_passengers_positions = []
 first_front_loaded_passengers_positions = []
-add_points(first_front_loaded_passengers_plane, first_passengers, first_front_loaded_passengers_masses, first_front_loaded_passengers_positions)
-add_points(first_rear_loaded_passengers_plane, first_passengers, first_rear_loaded_passengers_masses, first_rear_loaded_passengers_positions, reversed=True)
+add_points(first_front_loaded_passengers_plane, passengers, first_front_loaded_passengers_masses, first_front_loaded_passengers_positions)
+add_points(first_rear_loaded_passengers_plane, passengers, first_rear_loaded_passengers_masses, first_rear_loaded_passengers_positions, reversed=True)
 
 second_front_loaded_passengers_plane = copy.deepcopy(first_front_loaded_passengers_plane)
 second_rear_loaded_passengers_plane = copy.deepcopy(first_front_loaded_passengers_plane)
@@ -88,8 +93,8 @@ second_rear_loaded_passengers_masses = []
 second_front_loaded_passengers_masses = []
 second_rear_loaded_passengers_positions = []
 second_front_loaded_passengers_positions = []
-add_points(second_front_loaded_passengers_plane, first_passengers, second_front_loaded_passengers_masses, second_front_loaded_passengers_positions)
-add_points(second_rear_loaded_passengers_plane, first_passengers, second_rear_loaded_passengers_masses, second_rear_loaded_passengers_positions, reversed=True)
+add_points(second_front_loaded_passengers_plane, passengers, second_front_loaded_passengers_masses, second_front_loaded_passengers_positions)
+add_points(second_rear_loaded_passengers_plane, passengers, second_rear_loaded_passengers_masses, second_rear_loaded_passengers_positions, reversed=True)
 
 fuel_masses = []
 fuel_positions = []
@@ -110,30 +115,37 @@ second_front_loaded_passengers_positions = transform_positions(second_front_load
 second_rear_loaded_passengers_positions = transform_positions(second_rear_loaded_passengers_positions, MAC)
 
 fuel_positions = transform_positions(fuel_positions, MAC)
+print(fueled_plane.get_mass())
 
+cgs = front_loaded_cargo_positions + rear_loaded_cargo_positions + first_front_loaded_passengers_positions + first_rear_loaded_passengers_positions + second_front_loaded_passengers_positions + second_rear_loaded_passengers_positions + fuel_positions
+maxcg = max(cgs)
+mincg = min(cgs)
 # Plotting
+import matplotlib.pyplot as plt
+
 plt.plot(front_loaded_cargo_positions, front_loaded_cargo_masses, 
-          marker='o')
+          marker='o', label="Front loaded Cargo")
 plt.plot(rear_loaded_cargo_positions, rear_loaded_cargo_masses, 
-          marker='o')
+          marker='o', label="Rear loaded Cargo")
 
 plt.plot(first_front_loaded_passengers_positions, first_front_loaded_passengers_masses, 
-          marker='^')
+          marker='o', label="First Front loaded Passengers")
 plt.plot(first_rear_loaded_passengers_positions, first_rear_loaded_passengers_masses, 
-          marker='^')
+          marker='o', label="First Rear loaded Passengers")
 
 plt.plot(second_front_loaded_passengers_positions, second_front_loaded_passengers_masses, 
-          marker='^')
+          marker='o', label="Second Front loaded Passengers")
 plt.plot(second_rear_loaded_passengers_positions, second_rear_loaded_passengers_masses, 
-          marker='^')
+          marker='o', label="Second Rear loaded Passengers")
 
-plt.plot(fuel_positions, fuel_masses, marker='^')
+plt.plot(fuel_positions, fuel_masses, marker='o', label="Fuel")
 
-# Update axis label to reflect transformation
+plt.axvline(x=maxcg, color='r', linestyle='--', linewidth=2, label="Max CG Limit")
+plt.axvline(x=mincg, color='b', linestyle='--', linewidth=2, label="Min CG Limit")
 
 plt.ylabel("Mass [kg]")
-plt.title("xcg [MAC]")
+plt.xlabel("xcg [MAC]")
 plt.grid(True)
-plt.legend()
+plt.legend()  # Ensures labels appear in the legend
 plt.tight_layout()
 plt.show()
