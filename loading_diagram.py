@@ -42,7 +42,7 @@ OEW = 13600
 #empty_plane_cg = 0.357498253 + LEMAC
 #empty_plane_cg = 0.2290540063 + LEMAC
 #empty_plane_cg = 0.4859424998 + LEMAC
-empty_plane_cg = 0.27*MAC + LEMAC
+empty_plane_cg = 0.1797668398*MAC + LEMAC
 
 cargo = [(772.5714286, 6.697), (579.4285714, 23.92)] #(mass, pos)
 passenger_weight = 84
@@ -57,13 +57,11 @@ for pos in range(18):
     passengers.append((2*passenger_weight, seat))
     seat += seat_dist
 
-print(passengers)
 b = 27.05
 cR = 2.480525534
 cT = 1.389874894
 LE_cR = 8.865206061
 fuel_loc = LE_cR + compute_cg(b, cR, cT)
-print(compute_cg(b, cR, cT))
 fuel_weight = 1500
 MAC = 2.305065311
 
@@ -115,11 +113,12 @@ second_front_loaded_passengers_positions = transform_positions(second_front_load
 second_rear_loaded_passengers_positions = transform_positions(second_rear_loaded_passengers_positions, MAC)
 
 fuel_positions = transform_positions(fuel_positions, MAC)
-print(fueled_plane.get_mass())
+
 
 cgs = front_loaded_cargo_positions + rear_loaded_cargo_positions + first_front_loaded_passengers_positions + first_rear_loaded_passengers_positions + second_front_loaded_passengers_positions + second_rear_loaded_passengers_positions + fuel_positions
 maxcg = max(cgs)
 mincg = min(cgs)
+print(mincg, maxcg)
 # Plotting
 import matplotlib.pyplot as plt
 
