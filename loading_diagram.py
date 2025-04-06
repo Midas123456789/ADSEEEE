@@ -36,34 +36,35 @@ def add_points(plane, objects, masses, xcgs, reversed=False):
         
         
 
-MAC = 2.305065311
-LEMAC = 9.149065006
+MAC = 2.463771418
+LEMAC = 11.69586907
 OEW = 13600
 #empty_plane_cg = 0.357498253 + LEMAC
 #empty_plane_cg = 0.2290540063 + LEMAC
 #empty_plane_cg = 0.4859424998 + LEMAC
-empty_plane_cg = 0.1797668398*MAC + LEMAC
+#empty_plane_cg = 0.1797668398*MAC + LEMAC
+empty_plane_cg = 0.2843072961*MAC + LEMAC #aftmost cg
 
 cargo = [(772.5714286, 6.697), (579.4285714, 23.92)] #(mass, pos)
 passenger_weight = 84
 rows = 18
 start_passenger_comp = 5.94
-length_passenger_comp = 12.29
+length_passenger_comp = 12.29*rows/18
 seat_dist = length_passenger_comp / (rows)
 seat = seat_dist / 2 + start_passenger_comp
 passengers = []
 
-for pos in range(18):
+for pos in range(rows):
     passengers.append((2*passenger_weight, seat))
     seat += seat_dist
 
 b = 27.05
-cR = 2.480525534
-cT = 1.389874894
-LE_cR = 8.865206061
+cR = 2.834799723
+cT = 1.675366636
+LE_cR = 11.3248
 fuel_loc = LE_cR + compute_cg(b, cR, cT)
 fuel_weight = 1500
-MAC = 2.305065311
+#MAC = 2.305065311
 
 fuel = [(2*fuel_weight, fuel_loc)]
 front_loaded_cargo_positions = []
