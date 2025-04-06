@@ -47,9 +47,9 @@ empty_plane_cg = 0.2843072961*MAC + LEMAC #aftmost cg
 
 cargo = [(772.5714286, 6.697), (579.4285714, 23.92)] #(mass, pos)
 passenger_weight = 84
-rows = 18
+rows = 14
 start_passenger_comp = 5.94
-length_passenger_comp = 12.29*rows/18
+length_passenger_comp = 12.29*(rows/18)
 seat_dist = length_passenger_comp / (rows)
 seat = seat_dist / 2 + start_passenger_comp
 passengers = []
