@@ -38,12 +38,12 @@ def add_points(plane, objects, masses, xcgs, reversed=False):
 
 MAC = 2.463771418
 LEMAC = 11.69586907
-OEW = 13600
+OEW = 14219.1
 #empty_plane_cg = 0.357498253 + LEMAC
 #empty_plane_cg = 0.2290540063 + LEMAC
 #empty_plane_cg = 0.4859424998 + LEMAC
 #empty_plane_cg = 0.1797668398*MAC + LEMAC
-empty_plane_cg = 0.2843072961*MAC + LEMAC #aftmost cg
+empty_plane_cg = 0.8195918839*MAC + LEMAC #aftmost cg
 
 passenger_weight = 84
 rows = 14
@@ -58,8 +58,8 @@ for pos in range(rows):
     seat += seat_dist
     
 cargo_total = 7400 - rows*4*passenger_weight
-front_cargo = 0.5714285714*cargo_total
-aft_cargo = 0.4285714286*cargo_total
+front_cargo = 0.5714285714*cargo_total #proportional to front max cargo
+aft_cargo = 0.4285714286*cargo_total #proportional to aft max cargo
 cargo = [(front_cargo, 6.697), (aft_cargo, 23.92)] #(mass, pos)
 
 b = 27.05
