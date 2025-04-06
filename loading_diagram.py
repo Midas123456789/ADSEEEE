@@ -45,7 +45,6 @@ OEW = 13600
 #empty_plane_cg = 0.1797668398*MAC + LEMAC
 empty_plane_cg = 0.2843072961*MAC + LEMAC #aftmost cg
 
-cargo = [(772.5714286, 6.697), (579.4285714, 23.92)] #(mass, pos)
 passenger_weight = 84
 rows = 14
 start_passenger_comp = 5.94
@@ -57,6 +56,11 @@ passengers = []
 for pos in range(rows):
     passengers.append((2*passenger_weight, seat))
     seat += seat_dist
+    
+cargo_total = 7400 - rows*4*passenger_weight
+front_cargo = 0.5714285714*cargo_total
+aft_cargo = 0.4285714286*cargo_total
+cargo = [(front_cargo, 6.697), (aft_cargo, 23.92)] #(mass, pos)
 
 b = 27.05
 cR = 2.834799723
