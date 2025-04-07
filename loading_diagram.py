@@ -43,13 +43,14 @@ OEW = 14219.1
 #empty_plane_cg = 0.2290540063 + LEMAC
 #empty_plane_cg = 0.4859424998 + LEMAC
 #empty_plane_cg = 0.1797668398*MAC + LEMAC
-empty_plane_cg = 0.8195918839*MAC + LEMAC #aftmost cg
+empty_plane_cg = 0.4854016701*MAC + LEMAC #aftmost cg
 
 passenger_weight = 84
 rows = 14
 start_passenger_comp = 5.94
 length_passenger_comp = 12.29*(rows/18)
 seat_dist = length_passenger_comp / (rows)
+print(seat_dist)
 seat = seat_dist / 2 + start_passenger_comp
 passengers = []
 
@@ -61,6 +62,9 @@ cargo_total = 7400 - rows*4*passenger_weight
 front_cargo = 0.5714285714*cargo_total #proportional to front max cargo
 aft_cargo = 0.4285714286*cargo_total #proportional to aft max cargo
 cargo = [(front_cargo, 6.697), (aft_cargo, 23.92)] #(mass, pos)
+# front_cargo = 500
+# aft_cargo = 0
+# cargo = [(front_cargo, 6.697), (aft_cargo, 23.92)] #(mass, pos)
 
 b = 27.05
 cR = 2.834799723
